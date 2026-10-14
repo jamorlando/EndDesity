@@ -1,0 +1,445 @@
+/* ====================================================================
+   团队工作日志与智能复盘管理系统 · 现代化商业级工程协同视觉规范 (飞书 / TAPD 标准)
+   100% Pure CSS (Zero-CDN, 无外部不可控依赖，支持内网极速秒开)
+   ==================================================================== */
+
+:root {
+  /* 飞书 / TAPD 现代企业协同蓝调 */
+  --primary: #3370FF;
+  --primary-hover: #165DFF;
+  --primary-active: #0E42D2;
+  --primary-light: #E8F3FF;
+  --primary-subtle: rgba(51, 112, 255, 0.08);
+
+  /* 状态功能色 (现代 B 端工业级预警) */
+  --success: #00B42A;
+  --success-bg: #E8FFEA;
+  --success-border: #AFF0B5;
+
+  --warning: #FF7D00;
+  --warning-bg: #FFF7E8;
+  --warning-border: #FFD591;
+
+  --danger: #F53F3F;
+  --danger-bg: #FFECE8;
+  --danger-border: #FFCCC7;
+
+  --info: #3370FF;
+  --info-bg: #E8F3FF;
+  --info-border: #ADC6FF;
+
+  /* 背景色阶 (清爽中性商务灰白) */
+  --bg-primary: #F5F6F7;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F7F8FA;
+  --bg-hover: #EFF0F1;
+  --bg-dark: #1F2329;
+
+  /* 文本阶梯 (高可读性深墨黑与灰度) */
+  --text-main: #1F2329;
+  --text-muted: #646A73;
+  --text-secondary: #8F959E;
+  --text-disabled: #BBDFC8;
+
+  /* 边框与分割线 */
+  --border-color: #DEE0E3;
+  --border-light: #EFF0F1;
+  --border-focus: #3370FF;
+
+  /* 现代无衬线中英文字体栈 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* 兼容旧别名映射，确保现有组件无损平滑迁移 */
+  --accent-cinnabar: var(--primary);
+  --accent-bamboo: var(--success);
+  --accent-ochre: var(--warning);
+  --font-serif: var(--font-sans);
+  --font-calligraphy: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 现代卡片设计 (飞书面板卡片规范) */
+.glass-card, .modern-card, .card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.glass-card:hover, .modern-card:hover, .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: #CFD5DE;
+}
+
+/* 顶栏规范 */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px 24px 40px;
+  position: relative;
+  z-index: 10;
+}
+
+/* 现代药丸/标签导航条 */
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #F0F2F5;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid #E5E6EB;
+}
+
+.nav-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-tab-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.nav-tab-btn.active, .nav-tab-btn.sub-active {
+  background: #FFFFFF;
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* 状态药丸与徽标 (现代化 Pill Badge) */
+.badge, .seal-tag, .cinnabar-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+}
+
+.badge-primary, .cinnabar-seal {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: rgba(51, 112, 255, 0.2);
+}
+
+.badge-success, .badge-bamboo {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: var(--success-border);
+}
+
+.badge-warning, .badge-ochre {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border-color: var(--warning-border);
+}
+
+.badge-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: var(--danger-border);
+}
+
+.badge-neutral {
+  background: #F2F3F5;
+  color: var(--text-muted);
+  border-color: #DEE0E3;
+}
+
+/* 按钮设计规范 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  line-height: 1.4;
+  outline: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 主行动按钮 (飞书蓝) */
+.btn-primary, .btn-cinnabar {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover:not(:disabled), .btn-cinnabar:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-primary:active:not(:disabled), .btn-cinnabar:active:not(:disabled) {
+  background: var(--primary-active);
+  border-color: var(--primary-active);
+}
+
+/* 次要/边框按钮 */
+.btn-secondary {
+  background: #FFFFFF;
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: #CFD5DE;
+}
+
+/* 成功绿色按钮 */
+.btn-bamboo, .btn-success {
+  background: var(--success);
+  color: #FFFFFF;
+  border-color: var(--success);
+}
+
+.btn-bamboo:hover:not(:disabled), .btn-success:hover:not(:disabled) {
+  background: #009A22;
+}
+
+/* 危险/警告按钮 */
+.btn-danger {
+  background: var(--danger);
+  color: #FFFFFF;
+  border-color: var(--danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #D83939;
+}
+
+/* 文本/幽灵按钮 */
+.btn-text {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: transparent;
+  padding: 6px 10px;
+}
+
+.btn-text:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-main);
+}
+
+/* 尺寸辅助 */
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+/* 输入表单控件 (工业级极简) */
+.ink-input, .ink-select, .ink-textarea,
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ink-input:focus, .ink-select:focus, .ink-textarea:focus,
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(51, 112, 255, 0.15);
+}
+
+.ink-input::placeholder, .ink-textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+/* 数据表格 (TAPD/飞书多维表格风) */
+.ink-table, .data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.ink-table th, .data-table th {
+  background: #F7F8FA;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.ink-table td, .data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #EFF0F1;
+  color: var(--text-main);
+  background: #FFFFFF;
+}
+
+.ink-table tr:hover td, .data-table tr:hover td {
+  background: #F9FAFB;
+}
+
+/* 现代模态窗遮罩与卡片 */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(31, 35, 41, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  padding: 24px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.btn-close:hover {
+  background: var(--bg-hover);
+  color: var(--text-main);
+}
+
+/* 常用排版与微工具类 */
+.text-primary { color: var(--primary); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-danger { color: var(--danger); }
+.text-muted { color: var(--text-muted); }
+
+/* 页面切换平滑动画与轻量淡入 */
+.main-container > * {
+  animation: viewFadeIn 0.15s ease-out;
+}
+
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
